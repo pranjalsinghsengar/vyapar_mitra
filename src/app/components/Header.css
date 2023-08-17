@@ -1,0 +1,37 @@
+.navbar{
+    width:100%;
+    padding: 20px 0;
+    /* height:0%; */
+    background-color: blue;
+    display: flex;
+    align-items: center;
+  /*   border:1px solid; */
+  }
+  .navbar-logo{
+    width:25%;
+    height:100%;
+  /*   border:1px solid green; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .nav-logo{
+    width:10%;
+  /*   height:100%; */
+  /*   border:1px solid green; */
+  }
+  .nav-items{
+    width:50%;
+    height: 100%;
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+  /*   border:1px solid grey; */
+    align-items: center;
+  /*   position: absolute;
+    right:0; */
+  }
+  .items{
+    color: #ffffff;
+    font-size: 12px;
+  }
