@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
 import styled from "styled-components";
 import "./Header.css";
+import { useEffect, useState } from "react";
 
 const Home = styled.div`
   position: absolute;
@@ -105,24 +106,83 @@ const Desktop8InnerRoot = styled.div`
   color: var(--color-white);
   font-family: var(--font-inter);
 `;
-const Header = () => {
+
+const NavItemsWrapper = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const NavItem = styled.li`
+  cursor: pointer;
+  margin: 5px 0;
+`;
+
+const NavbarWrapper = styled.div`
+  width: 100%;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: ${(props) => (props.isSticky ? "fixed" : "static")};
+  top: 0;
+  z-index: 999;
+`;
+
+const Header = ({}) => {
+  const scrollToContent = (target) => {
+    const element = document.getElementById(target);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const [isSticky, setIsSticky] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div class='navbar'>
+    <NavbarWrapper isSticky={isSticky} class='navbar'>
       <div class='navbar-logo'>
-        <img class='nav-logo' src='' />
+        <img class='nav-logo' src='/bottom-img-1@2x.png' />
       </div>
 
-      <ul class='nav-items'>
-        <li class='items'>Home</li>
-        <li class='items'>Certificate</li>
-        <li class='items'>Vision</li>
-        <li class='items'>Mission</li>
-        <li class='items'>Register</li>
-        <li class='items'>About us</li>
-        <li class='items'>Eng</li>
-        <li class='items'>line</li>
-      </ul>
-    </div>
+      <NavItemsWrapper className='nav-items'>
+        {/* <li class='items'>Home</li> */}
+        <NavItem
+          onClick={() => scrollToContent("certificate")}
+          className='items'
+        >
+          Certificate
+        </NavItem>
+        <NavItem onClick={() => scrollToContent("About")} className='items'>
+          About
+        </NavItem>
+        <NavItem onClick={() => scrollToContent("Programme")} className='items'>
+          Programme
+        </NavItem>
+        <NavItem onClick={() => scrollToContent("Mission")} className='items'>
+          Mission
+        </NavItem>
+        <NavItem onClick={() => scrollToContent("Directors")} className='items'>
+          Directors
+        </NavItem>
+        {/* <li class='items'>line</li> */}
+      </NavItemsWrapper>
+    </NavbarWrapper>
   );
 };
 

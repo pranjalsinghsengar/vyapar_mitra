@@ -77,7 +77,7 @@ const ClickHere = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px 25px;
+  padding: 5px 50px;
   border-radius: 50px;
   font-size: 1.5rem;
   /* width: 100px; */
@@ -214,18 +214,18 @@ const HomePage = () => {
           position: "relative",
         }}
       >
-        <Container>
+        <Container id='certificate' className='certificare'>
           <LeftContainer>
             <img src='/Frame 57.png' alt='' />
           </LeftContainer>
-          <RightContainer style={{}}>
-            <h1>
-              {" "}
-              {language === "english"
-                ? "Fill The Form To Apply"
-                : "आवेदन करने के लिए फॉर्म भरें"}
-            </h1>{" "}
-            <ClickHere_Container>
+          <RightContainer >
+            <ClickHere_Container style={{flexDirection:"column"}}>
+              <h1>
+                {" "}
+                {language === "english"
+                  ? "Fill The Form To Apply"
+                  : "आवेदन करने के लिए फॉर्म भरें"}
+              </h1>{" "}
               <Link href='/Form'>
                 <ClickHere>Apply</ClickHere>{" "}
               </Link>
@@ -234,6 +234,7 @@ const HomePage = () => {
         </Container>
 
         <LeftRightContainer
+          id='About'
           Heading={language === "english" ? "About" : "बारे में "}
           flexDirection='row'
           Img_source='/AboutCompany.png'
@@ -244,6 +245,7 @@ const HomePage = () => {
           }
         />
         <LeftRightContainer
+          id='Programme'
           Heading={language === "english" ? "Programme" : " प्रोग्राम  "}
           flexDirection='row-reverse'
           Img_source='/AboutCompany.png'
@@ -255,6 +257,7 @@ const HomePage = () => {
         />
 
         <LeftRightContainer
+          id='Mission'
           Heading={language === "english" ? "Mission" : " उद्देश्य  "}
           flexDirection='row'
           Img_source='/Frame 52.png'
@@ -282,6 +285,7 @@ const HomePage = () => {
           </ObjectPera>
 
           <Director
+            id='Directors'
             language={language}
             Img_Url='/Frame 277.png'
             Director_Name={

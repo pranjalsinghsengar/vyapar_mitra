@@ -1,11 +1,14 @@
 .navbar{
     width:100%;
-    padding: 20px 0;
+    /* padding: 20px 0; */
     /* height:0%; */
     background-color: blue;
     display: flex;
     align-items: center;
-  /*   border:1px solid; */
+justify-content: space-between;
+position: fixed;
+z-index: 999;
+    /*   border:1px solid; */
   }
   .navbar-logo{
     width:25%;
@@ -16,12 +19,12 @@
     justify-content: space-around;
   }
   .nav-logo{
-    width:10%;
+    height:50px;
   /*   height:100%; */
   /*   border:1px solid green; */
   }
   .nav-items{
-    width:50%;
+    width:40%;
     height: 100%;
     display: flex;
     list-style: none;
@@ -33,5 +36,5 @@
   }
   .items{
     color: #ffffff;
-    font-size: 12px;
+    font-size: 1.2rem
   }

@@ -9,9 +9,9 @@ const DirectorContainer = styled.div`
   background: var(--color_powderblue);
   margin: 10px 0;
   border-radius: 20px;
-  gap: 20px;
+  /* gap: 50px; */
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   font-size: var(--font-size-13xl);
 `;
@@ -20,9 +20,9 @@ const ImageControl = styled.div`
   border-radius: 20px;
   overflow: hidden;
 `;
-const Director = ({ Img_Url, Director_Name,language }) => {
+const Director = ({ Img_Url, Director_Name,language,id }) => {
   return (
-    <DirectorContainer>
+    <DirectorContainer id={id}>
       <ImageControl>
         <img src={Img_Url} alt='' />
       </ImageControl>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { styled } from "styled-components";
@@ -32,9 +32,15 @@ export const P = styled.p`
   font-size: var(--font-size-3xl-9);
 `;
 
-const LeftRightContainer = ({ Heading, pera, Img_source, flexDirection }) => {
+const LeftRightContainer = ({
+  Heading,
+  pera,
+  Img_source,
+  flexDirection,
+  id,
+}) => {
   return (
-    <Container flexDirection={flexDirection}>
+    <Container flexDirection={flexDirection} id={id}>
       <LeftContainer>
         <H1>{Heading}</H1>
         <P>{pera}</P>

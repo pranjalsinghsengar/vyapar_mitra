@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+
+.certificate{
+  border-radius: 20px;
+  /* border: 1px solid rgb(14, 59, 173); */
+  box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.529);
+}
