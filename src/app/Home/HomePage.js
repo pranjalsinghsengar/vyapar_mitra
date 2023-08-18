@@ -214,12 +214,12 @@ const HomePage = () => {
           position: "relative",
         }}
       >
-        <Container id='certificate' className='certificare'>
+        <Container id='certificate' className='certificate'>
           <LeftContainer>
             <img src='/Frame 57.png' alt='' />
           </LeftContainer>
-          <RightContainer >
-            <ClickHere_Container style={{flexDirection:"column"}}>
+          <RightContainer>
+            <ClickHere_Container style={{ flexDirection: "column" }}>
               <h1>
                 {" "}
                 {language === "english"
@@ -253,6 +253,17 @@ const HomePage = () => {
             language === "english"
               ? "India faced massive unemployment during the covid pandemic. One of the worst hit sectors was the impact of the unorganized sector, firstly due to sudden countrywide lockdown and then economic crisis. While some of them managed to get back to work, many are yet to recover, like roadside shop owners, beauty parlors, vegetable vendors, etc., as they took loans to survive and had to sell their equipment or whatever assets they had to repay. « The Coronavirus pandemic has wrecked the lives and livelihoods of millions of people in India, especially those in major cities in urban areas, who had once left their hometown/villages in search for work here. « Self-employed workers and casual wage workers are most affected with 84% and 81% losing their employment, respectively. « Atotal of 89% of the urban households reported that they would not be able to pay rent for the following month"
               : "भारत को कोविड महामारी के दौरान बड़े पैमाने पर बेरोजगारी का सामना करना पड़ा। सबसे बुरी तरह प्रभावित क्षेत्रों में से एक असंगठित क्षेत्र पर प्रभाव था, पहले अचानक देशव्यापी तालाबंदी और फिर आर्थिक संकट के कारण। जबकि उनमें से कुछ काम पर वापस आने में कामयाब रहे, कई अभी भी ठीक नहीं हुए हैं, जैसे सड़क किनारे दुकान के मालिक, ब्यूटी पार्लर, सब्जी विक्रेता, आदि, क्योंकि उन्होंने जीवित रहने के लिए ऋण लिया था और उन्हें अपने उपकरण या जो भी संपत्ति चुकानी थी, उसे बेचना पड़ा। . “कोरोनावायरस महामारी ने भारत में लाखों लोगों के जीवन और आजीविका को बर्बाद कर दिया है, खासकर शहरी क्षेत्रों के प्रमुख शहरों में, जो कभी काम की तलाश में अपने गृहनगर/गांव छोड़कर यहां आए थे। स्व-रोज़गार श्रमिक और आकस्मिक वेतन वाले श्रमिक सबसे अधिक प्रभावित हुए हैं, क्रमशः 84% और 81% ने अपना रोजगार खो दिया है। « कुल 89% शहरी परिवारों ने बताया कि वे अगले महीने का किराया नहीं दे पाएंगे"
+          }
+        />
+        <LeftRightContainer
+          id='Vision'
+          Heading={language === "english" ? "Vision" : " दृष्टि  "}
+          flexDirection='row'
+          Img_source='/Frame 52.png'
+          pera={
+            language === "english"
+              ? " Upgrade skills to Intemational standards through significant industry involvement and develop necessary frameworks for standards, curriculum and quality assurance. Enhance, support and coordinate private sector initiatives for skill development through appropriate Public-Private Partnership ( PPP) models: strive for significant operational and financial involvement from private sector.  Play the role of a ‘market-maker’ by bringing funds, particularly in sectors where market mechanisms are ineffective or missing. Prioritise initiatives that can have a multiplier or catalytic effect as opposed to one-off impact. Objective To contribute significantly to the overall target of skilling up of people in India, mainly by fostering private sector initiatives in skill de programmes and to provide funding."
+              : " महत्वपूर्ण उद्योग भागीदारी के माध्यम से कौशल को अंतर्राष्ट्रीय मानकों में अपग्रेड करें और मानकों, पाठ्यक्रम आदि के लिए आवश्यक रूपरेखा विकसित करें गुणवत्ता आश्वासन। उपयुक्त सार्वजनिक-निजी भागीदारी (पीपीपी) मॉडल के माध्यम से कौशल विकास के लिए निजी क्षेत्र की पहल को बढ़ाना, समर्थन और समन्वय करना: निजी क्षेत्र से महत्वपूर्ण परिचालन और वित्तीय भागीदारी के लिए प्रयास करें। » विशेष रूप से उन क्षेत्रों में जहां बाजार तंत्र अप्रभावी या गायब हैं, धन लाकर 'बाज़ार-निर्माता' की भूमिका निभाएं। » उन पहलों को प्राथमिकता दें जिनका एकमुश्त प्रभाव के बजाय गुणक या उत्प्रेरक प्रभाव हो सकता है। उद्देश्य भारत में लोगों को कौशल प्रदान करने के समग्र लक्ष्य में महत्वपूर्ण योगदान देना, मुख्य रूप से कौशल विकास में निजी क्षेत्र की पहल को बढ़ावा देना कार्यक्रम और वित्त पोषण प्रदान करना।"
           }
         />
 
