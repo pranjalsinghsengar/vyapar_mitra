@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import styled from "styled-components";
 
@@ -13,10 +15,17 @@ const DirectorContainer = styled.div`
   align-items: center;
   font-size: var(--font-size-13xl);
 `;
+const ImageControl = styled.div`
+width: 150px;
+border-radius: 20px ;
+overflow: hidden;
+`;
 const Director = ({ Img_Url, Director_Name }) => {
   return (
     <DirectorContainer>
-      <img src={Img_Url} alt='' />
+      <ImageControl>
+        <img src={Img_Url} alt='' />
+      </ImageControl>
       <div>
         Director:
         <p>{Director_Name}</p>
