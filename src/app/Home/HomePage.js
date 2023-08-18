@@ -65,7 +65,7 @@ const Desktop8Root = styled.div`
   text-align: left;
   font-size: var(--font-size-29xl);
   color: var(--color-black);
-  font-family: var(--font-inter);
+  /* font-family: var(--font-inter); */
 `;
 
 const ClickHere_Container = styled.div`
@@ -90,7 +90,7 @@ const ObjectPera = styled.p`
   font-size: 1.8rem;
   color: #000;
   text-align: center;
-  font-family: Inter;
+  /* font-family: Inter; */
   font-size: 16px;
   font-style: normal;
   font-weight: 300;
@@ -140,6 +140,7 @@ const ButtonLan = styled.div`
   border-radius: 20px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 `;
 
 // ====================================================================
