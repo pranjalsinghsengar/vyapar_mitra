@@ -174,12 +174,13 @@ const Header = ({}) => {
         <NavItem onClick={() => scrollToContent("Programme")} className='items'>
           Programme
         </NavItem>
-        <NavItem onClick={() => scrollToContent("Programme")} className='items'>
-          Vision
-        </NavItem>
         <NavItem onClick={() => scrollToContent("Mission")} className='items'>
           Mission
         </NavItem>
+        <NavItem onClick={() => scrollToContent("Vision")} className='items'>
+          Vision
+        </NavItem>
+
         <NavItem onClick={() => scrollToContent("Directors")} className='items'>
           Directors
         </NavItem>
