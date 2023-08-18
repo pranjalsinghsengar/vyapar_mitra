@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import styled from "styled-components";
@@ -16,18 +16,19 @@ const DirectorContainer = styled.div`
   font-size: var(--font-size-13xl);
 `;
 const ImageControl = styled.div`
-width: 150px;
-border-radius: 20px ;
-overflow: hidden;
+  width: 150px;
+  border-radius: 20px;
+  overflow: hidden;
 `;
-const Director = ({ Img_Url, Director_Name }) => {
+const Director = ({ Img_Url, Director_Name,language }) => {
   return (
     <DirectorContainer>
       <ImageControl>
         <img src={Img_Url} alt='' />
       </ImageControl>
       <div>
-        Director:
+        {language === "english" ? "Director: " : "निदेशक"}
+
         <p>{Director_Name}</p>
       </div>
     </DirectorContainer>
