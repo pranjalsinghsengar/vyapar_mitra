@@ -1,3 +1,5 @@
+"use client";
+
 import { Property } from "csstype";
 import styled from "styled-components";
 
@@ -8,16 +10,16 @@ const FrameDivRoot = styled.div`position: relative;
   width: 620px;
   height: 63px;
   overflow: hidden;
-  position: ${(p) => p.frameDivPosition}
-  width: ${(p) => p.frameDivWidth}
-  height: ${(p) => p.frameDivHeight}
-  top: ${(p) => p.frameDivTop}
-  right: ${(p) => p.frameDivRight}
-  left: ${(p) => p.frameDivLeft}
-  box-sizing: ${(p) => p.frameDivBoxSizing}
-  align-self: ${(p) => p.frameDivAlignSelf}
-  flex: ${(p) => p.frameDivFlex}
-  flex-shrink: ${(p) => p.frameDivFlexShrink}
+  position: ${(p) => p.frameDivPosition};
+  width: ${(p) => p.frameDivWidth};
+  height: ${(p) => p.frameDivHeight};
+  top: ${(p) => p.frameDivTop};
+  right: ${(p) => p.frameDivRight};
+  left: ${(p) => p.frameDivLeft};
+  box-sizing: ${(p) => p.frameDivBoxSizing};
+  align-self: ${(p) => p.frameDivAlignSelf};
+  flex: ${(p) => p.frameDivFlex};
+  flex-shrink: ${(p) => p.frameDivFlexShrink};
 `;
 const FrameComponent = ({
   frameDivPosition,

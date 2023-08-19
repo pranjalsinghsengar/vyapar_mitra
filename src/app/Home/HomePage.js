@@ -119,8 +119,8 @@ const P = styled.p`
   font-weight: 200;
 `;
 const LangContainer = styled.div`
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -130,9 +130,10 @@ const LangContainer = styled.div`
   align-items: center;
   border-radius: 20px;
   z-index: 999;
-  background: #ffffff50;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background: #A7C5FC50;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  font-size: 1.5rem;
 `;
 const ButtonLan = styled.div`
   background: #5d8bdab9;
@@ -160,9 +161,9 @@ const HomePage = () => {
     <Desktop8Root>
       {language === null && (
         <LangContainer className={{}}>
-          <div>
-            <p>Select a language:</p>
-            <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
+          <div style={{ display: "flex", gap: 20 , alignItems:"center"}}>
+            <span>Select a language:</span>
+            <div style={{ display: "flex", gap: 20 }}>
               <ButtonLan onClick={() => handleLanguageChange("hindi")}>
                 Hindi
               </ButtonLan>

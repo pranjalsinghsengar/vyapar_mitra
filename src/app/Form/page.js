@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import Link from "../../../node_modules/next/link";
+import axios from "axios";
+import { SubmitHandle } from "../utils/googleSheets";
 
 const Container = styled.div`
   max-width: 800px;
@@ -110,73 +112,130 @@ const IndexPage = () => {
     permanentPincode: "",
     permanentMobile: "",
     dob: "",
-    cardType: "",
+    castType: "",
     maritalStatus: "",
-    qualifications: [
-      {
-        srno: "1",
-        degree: "Matric/S.S.C",
-        university: "",
-        year: "",
-        percentage: "",
-      },
-      {
-        srno: "2",
-        degree: "Inter/Sr. Secondary",
-        university: "",
-        year: "",
-        percentage: "",
-      },
-      {
-        srno: "3",
-        degree: "B.A./B.Com./B.Sc/B.E./B.Tech.",
-        university: "",
-        year: "",
-        percentage: "",
-      },
-      {
-        srno: "4",
-        degree: "Other (if Any)",
-        university: "",
-        year: "",
-        percentage: "",
-      },
-    ],
-    workExperience: [
-      {
-        srno: "1",
-        company: "",
-        designation: "",
-        startDate: "",
-        endDate: "",
-      },
-      {
-        srno: "2",
-        company: "",
-        designation: "",
-        startDate: "",
-        endDate: "",
-      },
-    ],
   };
+  const [qualifications, setQualifications] = useState([
+    {
+      srno: "1",
+      degree: "Matric/S.S.C",
+      university: "",
+      year: "",
+      percentage: "",
+    },
+    {
+      srno: "2",
+      degree: "Inter/Sr. Secondary",
+      university: "",
+      year: "",
+      percentage: "",
+    },
+    {
+      srno: "3",
+      degree: "B.A./B.Com./B.Sc/B.E./B.Tech.",
+      university: "",
+      year: "",
+      percentage: "",
+    },
+    {
+      srno: "4",
+      degree: "Other (if Any)",
+      university: "",
+      year: "",
+      percentage: "",
+    },
+  ]);
+  function updateQualification(index, field, value) {
+    setQualifications((prevQualifications) => {
+      const updatedQualifications = [...prevQualifications];
+      updatedQualifications[index][field] = value;
+      return updatedQualifications;
+    });
+  }
+  const [workExperience, setWorkExperience] = useState([
+    {
+      srno: "1",
+      company: "",
+      designation: "",
+      startDate: "",
+      endDate: "",
+    },
+    {
+      srno: "2",
+      company: "",
+      designation: "",
+      startDate: "",
+      endDate: "",
+    },
+  ]);
+  // Inside your component
+  function updateWorkExperience(index, field, value) {
+    setWorkExperience((prevWorkExperience) => {
+      const updatedWorkExperience = [...prevWorkExperience];
+      updatedWorkExperience[index][field] = value;
+      return updatedWorkExperience;
+    });
+  }
+
+  // Inside your component
+
   const [isChecked, setIsChecked] = useState("VyaparMitra");
+  const [formData, setFormData] = useState(initialValues);
 
+  const updateFieldValue = (fieldName, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  };
+
+  const alldata = {
+    FullName: formData.fullName,
+    aadharNumber: formData.aadharNumber,
+    phoneNumber: formData.phoneNumber,
+    fathersName: formData.fathersName,
+    correspondenceAddress: formData.correspondenceAddress,
+    correspondencePincode: formData.correspondencePincode,
+    correspondenceMobile: formData.correspondenceMobile,
+    permanentAddress: formData.permanentAddress,
+    permanentPincode: formData.permanentPincode,
+    permanentMobile: formData.permanentMobile,
+    dob: formData.dob,
+    castType: formData.castType,
+    maritalStatus: formData.maritalStatus,
+    FormType: isChecked,
+    //
+    university: qualifications.university,
+    year: qualifications.year,
+    percentage: qualifications.percentage,
+    //
+    company: workExperience.company,
+    designation: workExperience.designation,
+    startDate: workExperience.startDate,
+    endDate: workExperience.endDate,
+  };
   // Inside your form submission function
-  const submitForm = async (values) => {
-    try {
-      const response = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
 
-      const data = await response.json();
-      console.log(data);
+  const SubmitHandler = async () => {
+    console.log("alldata ", alldata);
+    try {
+      await SubmitHandle(alldata);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error:", error);
     }
+    // axios
+    //   .post(
+    //     "https://sheet.best/api/sheets/076c7653-6491-4dc3-9bc5-7bb4c5c749ec",
+    //     alldata
+    //   )
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
+  };
+
+  const onSubmit = (values) => {
+    setFormData(values); // Update the state with form data
+    console.log(values);
   };
 
   return (
@@ -230,38 +289,69 @@ const IndexPage = () => {
         </Option>
       </div>
 
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik initialValues={formData} onSubmit={onSubmit}>
         <Form>
           {/* ... (previous form fields) */}
           <FormGroup>
             <Label>Full Name</Label>
-            <Input type='text' name='fullName' />
+            <Input
+              type='text'
+              name='fullName'
+              value={formData.fullName}
+              onChange={(e) => updateFieldValue("fullName", e.target.value)}
+            />
             <ErrorMessageStyled name='fullName' component='div' />
           </FormGroup>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <FormGroup>
               <Label>Aadhar Number</Label>
-              <Input type='text' name='aadharNumber' />
+              <Input
+                type='text'
+                name='aadharNumber'
+                value={formData.aadharNumber}
+                onChange={(e) =>
+                  updateFieldValue("aadharNumber", e.target.value)
+                }
+              />
               <ErrorMessageStyled name='aadharNumber' component='div' />
             </FormGroup>
             <FormGroup>
               <Label>Phone Number</Label>
-              <Input type='text' name='phoneNumber' />
+              <Input
+                type='text'
+                name='phoneNumber'
+                value={formData.phoneNumber}
+                onChange={(e) =>
+                  updateFieldValue("phoneNumber", e.target.value)
+                }
+              />
               <ErrorMessageStyled name='phoneNumber' component='div' />
             </FormGroup>
           </div>
 
           <FormGroup>
             <Label>{"Father's Name"}</Label>
-            <Input type='text' name='fathersName' />
+            <Input
+              type='text'
+              name='fathersName'
+              value={formData.fathersName}
+              onChange={(e) => updateFieldValue("fathersName", e.target.value)}
+            />
             <ErrorMessageStyled name='fathersName' component='div' />
           </FormGroup>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ width: "48%" }}>
               <FormGroup>
                 <Label>Correspondence Address</Label>
-                <TextArea name='correspondenceAddress' rows='3' />
+                <TextArea
+                  name='correspondenceAddress'
+                  rows='3'
+                  value={formData.correspondenceAddress}
+                  onChange={(e) =>
+                    updateFieldValue("correspondenceAddress", e.target.value)
+                  }
+                />
                 <ErrorMessageStyled
                   name='correspondenceAddress'
                   component='div'
@@ -270,7 +360,14 @@ const IndexPage = () => {
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <FormGroup style={{ marginRight: 10 }}>
                   <Label> Pincode</Label>
-                  <Input type='text' name='correspondencePincode' />
+                  <Input
+                    type='text'
+                    name='correspondencePincode'
+                    value={formData.correspondencePincode}
+                    onChange={(e) =>
+                      updateFieldValue("correspondencePincode", e.target.value)
+                    }
+                  />
                   <ErrorMessageStyled
                     name='correspondencePincode'
                     component='div'
@@ -278,7 +375,14 @@ const IndexPage = () => {
                 </FormGroup>
                 <FormGroup>
                   <Label>Mobile</Label>
-                  <Input type='text' name='correspondenceMobile' />
+                  <Input
+                    type='text'
+                    name='correspondenceMobile'
+                    value={formData.correspondenceMobile}
+                    onChange={(e) =>
+                      updateFieldValue("correspondenceMobile", e.target.value)
+                    }
+                  />
                   <ErrorMessageStyled
                     name='correspondenceMobile'
                     component='div'
@@ -289,18 +393,39 @@ const IndexPage = () => {
             <div style={{ width: "48%" }}>
               <FormGroup>
                 <Label>Permanent Address</Label>
-                <TextArea name='permanentAddress' rows='3' />
+                <TextArea
+                  name='permanentAddress'
+                  rows='3'
+                  value={formData.permanentAddress}
+                  onChange={(e) =>
+                    updateFieldValue("permanentAddress", e.target.value)
+                  }
+                />
                 <ErrorMessageStyled name='permanentAddress' component='div' />
               </FormGroup>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <FormGroup style={{ marginRight: 10 }}>
                   <Label>Permanent Pincode</Label>
-                  <Input type='text' name='permanentPincode' />
+                  <Input
+                    type='text'
+                    name='permanentPincode'
+                    value={formData.permanentPincode}
+                    onChange={(e) =>
+                      updateFieldValue("permanentPincode", e.target.value)
+                    }
+                  />
                   <ErrorMessageStyled name='permanentPincode' component='div' />
                 </FormGroup>
                 <FormGroup>
                   <Label>Permanent Mobile</Label>
-                  <Input type='text' name='permanentMobile' />
+                  <Input
+                    type='text'
+                    name='permanentMobile'
+                    value={formData.permanentMobile}
+                    onChange={(e) =>
+                      updateFieldValue("permanentMobile", e.target.value)
+                    }
+                  />
                   <ErrorMessageStyled name='permanentMobile' component='div' />
                 </FormGroup>
               </div>
@@ -309,14 +434,24 @@ const IndexPage = () => {
 
           <FormGroup>
             <Label>Date of Birth</Label>
-            <Input type='date' name='dob' />
+            <Input
+              type='date'
+              name='dob'
+              value={formData.dob}
+              onChange={(e) => updateFieldValue("dob", e.target.value)}
+            />
             <ErrorMessageStyled name='dob' component='div' />
           </FormGroup>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <FormGroup>
               <Label>Cast: </Label>
-              <Field as='select' name='cardType'>
+              <Field
+                as='select'
+                name='castType'
+                value={formData.castType}
+                onChange={(e) => updateFieldValue("castType", e.target.value)}
+              >
                 <option value=''>Select Card Type</option>
                 <option value='sc'>SC</option>
                 <option value='st'>ST</option>
@@ -328,7 +463,14 @@ const IndexPage = () => {
 
             <FormGroup>
               <Label>Marital Status:</Label>
-              <Field as='select' name='maritalStatus'>
+              <Field
+                as='select'
+                name='maritalStatus'
+                value={formData.maritalStatus}
+                onChange={(e) =>
+                  updateFieldValue("maritalStatus", e.target.value)
+                }
+              >
                 <option value=''>Select Marital Status</option>
                 <option value='married'>Married</option>
                 <option value='unmarried'>Unmarried</option>
@@ -350,7 +492,7 @@ const IndexPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {initialValues.qualifications.map((qualification, index) => (
+                {qualifications.map((qualification, index) => (
                   <tr key={index}>
                     <TableCell>{qualification.srno}</TableCell>
                     <TableCell>{qualification.degree}</TableCell>
@@ -358,18 +500,38 @@ const IndexPage = () => {
                       <Input
                         type='text'
                         name={`qualifications[${index}].university`}
+                        value={qualification.university}
+                        onChange={(e) =>
+                          updateQualification(
+                            index,
+                            "university",
+                            e.target.value
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         type='text'
                         name={`qualifications[${index}].year`}
+                        value={qualification.year}
+                        onChange={(e) =>
+                          updateQualification(index, "year", e.target.value)
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         type='text'
                         name={`qualifications[${index}].percentage`}
+                        value={qualification.percentage}
+                        onChange={(e) =>
+                          updateQualification(
+                            index,
+                            "percentage",
+                            e.target.value
+                          )
+                        }
                       />
                     </TableCell>
                   </tr>
@@ -393,31 +555,55 @@ const IndexPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {initialValues.workExperience.map((experience, index) => (
+                {workExperience.map((experience, index) => (
                   <tr key={index}>
                     <TableCell>{experience.srno}</TableCell>
                     <TableCell>
                       <Input
                         type='text'
                         name={`workExperience[${index}].company`}
+                        value={experience.company}
+                        onChange={(e) =>
+                          updateWorkExperience(index, "company", e.target.value)
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         type='text'
                         name={`workExperience[${index}].designation`}
+                        value={experience.designation}
+                        onChange={(e) =>
+                          updateWorkExperience(
+                            index,
+                            "designation",
+                            e.target.value
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
-                        type='date'
+                        type='text'
                         name={`workExperience[${index}].startDate`}
+                        value={experience.startDate}
+                        onChange={(e) =>
+                          updateWorkExperience(
+                            index,
+                            "startDate",
+                            e.target.value
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
-                        type='date'
+                        type='text'
                         name={`workExperience[${index}].endDate`}
+                        value={experience.endDate}
+                        onChange={(e) =>
+                          updateWorkExperience(index, "endDate", e.target.value)
+                        }
                       />
                     </TableCell>
                   </tr>
@@ -434,7 +620,7 @@ const IndexPage = () => {
             }}
           >
             <Link href='/Payment'>
-              <Button type='submit' onClick={submitForm}>
+              <Button type='submit' onClick={SubmitHandler}>
                 Pay 299
               </Button>
             </Link>
