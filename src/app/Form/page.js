@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import Link from "../../../node_modules/next/link";
 import axios from "axios";
-import { SubmitHandle } from "../utils/googleSheets";
+// import { SubmitHandle } from "../utils/googleSheets";
 
 const Container = styled.div`
   max-width: 800px;
@@ -218,11 +218,7 @@ const IndexPage = () => {
 
   const SubmitHandler = async () => {
     console.log("alldata ", alldata);
-    try {
-      await SubmitHandle(alldata);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+   naegs 
     // axios
     //   .post(
     //     "https://sheet.best/api/sheets/076c7653-6491-4dc3-9bc5-7bb4c5c749ec",
