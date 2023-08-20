@@ -190,20 +190,22 @@ const IndexPage = () => {
   };
 
   const alldata = {
+    Form_Type: isChecked,
+
     FullName: formData.fullName,
-    aadharNumber: formData.aadharNumber,
-    phoneNumber: formData.phoneNumber,
-    fathersName: formData.fathersName,
-    correspondenceAddress: formData.correspondenceAddress,
-    correspondencePincode: formData.correspondencePincode,
+    aadhar_Number: formData.aadharNumber,
+    phone_Number: formData.phoneNumber,
+    fathers_Name: formData.fathersName,
+    correspondence_Address: formData.correspondenceAddress,
+    correspondence_Pincode: formData.correspondencePincode,
     correspondenceMobile: formData.correspondenceMobile,
     permanentAddress: formData.permanentAddress,
     permanentPincode: formData.permanentPincode,
     permanentMobile: formData.permanentMobile,
     dob: formData.dob,
-    castType: formData.castType,
-    maritalStatus: formData.maritalStatus,
-    FormType: isChecked,
+    cast_Type: formData.castType,
+    
+    marital_Status: formData.maritalStatus,
     //
     university: qualifications.university,
     year: qualifications.year,
@@ -216,19 +218,50 @@ const IndexPage = () => {
   };
   // Inside your form submission function
 
+  // const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
+
+  // function writeData(auth) {
+  //   const sheets = google.sheets({ version: "v4", auth });
+  //   //  ALL DATA
+  //   let values = alldata;
+  //   const resource = {
+  //     values,
+  //   };
+
+  //   sheets.spreadsheets.values.append(
+  //     {
+  //       spreadsheetId: "1oH2kjRfNYoXYLzWZvWSAV4DyzotVKXZh7g9BVRD6Jxs",
+  //       range: "Class Data!A1",
+  //       valueInputOption: "RAW",
+  //       resource: resource,
+  //     },
+  //     (err, result) => {
+  //       if (err) {
+  //         // Handle error
+  //         console.log(err);
+  //       } else {
+  //         console.log(
+  //           "%d cells updated on range: %s",
+  //           result.data.updates.updatedCells,
+  //           result.data.updates.updatedRange
+  //         );
+  //       }
+  //     }
+  //   );
+  // }
+
   const SubmitHandler = async () => {
     console.log("alldata ", alldata);
-   naegs 
-    // axios
-    //   .post(
-    //     "https://sheet.best/api/sheets/076c7653-6491-4dc3-9bc5-7bb4c5c749ec",
-    //     alldata
-    //   )
-    //   .then((response) => {
-    //     console.log(response);
-    //   });
+    await axios
+      .post(
+        "https://sheet.best/api/sheets/7d33220f-660f-4e5f-82bc-b49e513a85ab",
+        alldata
+      )
+      .then((response) => {
+        console.log("response", response);
+      });
   };
-
+ 
   const onSubmit = (values) => {
     setFormData(values); // Update the state with form data
     console.log(values);
