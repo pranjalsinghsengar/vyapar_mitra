@@ -14,23 +14,36 @@ const DirectorContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   font-size: var(--font-size-13xl);
+  @media (max-width: 600px) {
+    width: 90%;
+    padding: 40px 0;
+  }
 `;
 const ImageControl = styled.div`
-  width: 150px;
+  width: 30%;
   border-radius: 20px;
   overflow: hidden;
+  @media (max-width: 600px) {
+    width: 25%;
+
+  }
 `;
-const Director = ({ Img_Url, Director_Name,language,id }) => {
+const DirectorName = styled.div`
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+`;
+const Director = ({ Img_Url, Director_Name, language, id }) => {
   return (
     <DirectorContainer id={id}>
       <ImageControl>
         <img src={Img_Url} alt='' />
       </ImageControl>
-      <div>
+      <DirectorName>
         {language === "english" ? "Director: " : "निदेशक"}
 
         <p>{Director_Name}</p>
-      </div>
+      </DirectorName>
     </DirectorContainer>
   );
 };

@@ -3,6 +3,10 @@
 import styled from "styled-components";
 import "./Header.css";
 import { useEffect, useState } from "react";
+import Link from "../../../node_modules/next/link";
+import Menu from "../../../Menu/Menu";
+
+// import { AiOutlineMenu } from 'react-icons/ai';
 
 const Home = styled.div`
   position: absolute;
@@ -111,14 +115,54 @@ const NavItemsWrapper = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  @media (max-width: 600px) {
+    display: none;
+  }
+`;
+const HamBerger = styled.div`
+  display: none;
+  @media (max-width: 600px) {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    /* position: fixed; */
+    z-index: 999;
+    gap: 8px;
+    /* display: none; */
+  }
+`;
+const HamSpan = styled.div`
+  width: 30px;
+  height: 2px;
+  background: white;
+  margin-right: 10px;
+
+  /* list-style: none;
+  padding: 0;
+  margin: 0; */
+  @media (max-width: 600px) {
+    /* display: none; */
+  }
+`;
+export const MenuItemsWrapper = styled.ul`
+  @media (max-width: 600px) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    float: bottom;
+    z-index: 999;
+  }
 `;
 
-const NavItem = styled.li`
+export const NavItem = styled.li`
   cursor: pointer;
   margin: 5px 0;
 `;
 
-const NavbarWrapper = styled.div`
+export const NavbarWrapper = styled.div`
   width: 100%;
   background-color: blue;
   display: flex;
@@ -153,41 +197,66 @@ const Header = ({}) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const [MenuBar, setMenuBar] = useState(false);
 
   return (
-    <NavbarWrapper isSticky={isSticky} class='navbar'>
-      <div class='navbar-logo'>
-        <img class='nav-logo' src='/bottom-img-1@2x.png' />
-      </div>
+    <>
+      <NavbarWrapper isSticky={isSticky} class='navbar'>
+        <div class='navbar-logo'>
+          <img class='nav-logo' src='/bottom-img-1@2x.png' />
+        </div>
 
-      <NavItemsWrapper className='nav-items'>
-        {/* <li class='items'>Home</li> */}
-        <NavItem
-          onClick={() => scrollToContent("certificate")}
-          className='items'
-        >
-          Certificate
-        </NavItem>
-        <NavItem onClick={() => scrollToContent("About")} className='items'>
-          About
-        </NavItem>
-        <NavItem onClick={() => scrollToContent("Programme")} className='items'>
-          Programme
-        </NavItem>
-        <NavItem onClick={() => scrollToContent("Mission")} className='items'>
-          Mission
-        </NavItem>
-        <NavItem onClick={() => scrollToContent("Vision")} className='items'>
-          Vision
-        </NavItem>
+        <NavItemsWrapper className='nav-items'>
+          {/* <li class='items'>Home</li> */}
+          <NavItem
+            onClick={() => scrollToContent("certificate")}
+            className='items'
+          >
+            Certificate
+          </NavItem>
+          <NavItem onClick={() => scrollToContent("About")} className='items'>
+            About
+          </NavItem>
+          <NavItem
+            onClick={() => scrollToContent("Programme")}
+            className='items'
+          >
+            Programme
+          </NavItem>
+          <NavItem onClick={() => scrollToContent("Mission")} className='items'>
+            Mission
+          </NavItem>
+          <NavItem onClick={() => scrollToContent("Vision")} className='items'>
+            Vision
+          </NavItem>
 
-        <NavItem onClick={() => scrollToContent("Directors")} className='items'>
-          Directors
-        </NavItem>
-        {/* <li class='items'>line</li> */}
-      </NavItemsWrapper>
-    </NavbarWrapper>
+          <NavItem
+            onClick={() => scrollToContent("Directors")}
+            className='items'
+          >
+            Directors
+          </NavItem>
+          {/* <li class='items'>line</li> */}
+        </NavItemsWrapper>
+        {/* <Link href='/Menu'> */}
+        <HamBerger onClick={() => setMenuBar(!MenuBar)}>
+          <HamSpan></HamSpan>
+          <HamSpan></HamSpan>
+          <HamSpan></HamSpan>
+        </HamBerger>
+        {/* </Link> */}
+      </NavbarWrapper>
+      {MenuBar && <Menu />}
+    </>
   );
 };
 
 export default Header;
+
+const MenuContainer = styled.div`
+  width: 40%;
+  height: 80%;
+  position: absolute;
+  right: 0;
+  background: #0000ff;
+`;

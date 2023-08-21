@@ -25,8 +25,7 @@ const Desktop8Child = styled.img`
 `;
 const WhatsappImage20230813At1 = styled.img`
   position: relative;
-  width: 11.06rem;
-  height: 6.89rem;
+  width: 40%;
   object-fit: cover;
 `;
 const MithshaVyaparSanchar = styled.div`
@@ -36,6 +35,9 @@ const MithshaVyaparSanchar = styled.div`
   width: 29.38rem;
   height: 3.19rem;
   flex-shrink: 0;
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 `;
 const WhatsappImage20230813At1Parent = styled.div`
   display: flex;
@@ -72,6 +74,11 @@ const ClickHere_Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+
+  @media (max-width: 600px) {
+  }
 `;
 const ClickHere = styled.div`
   display: flex;
@@ -82,6 +89,22 @@ const ClickHere = styled.div`
   font-size: 1.5rem;
   /* width: 100px; */
   background: var(--color_royalblue);
+  margin: 20px 0;
+  @media (max-width: 600px) {
+    font-size: 1rem;
+    margin: 10px;
+  }
+`;
+const ObjectiveContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60%;
+  /* background: var(--color_royalblue); */
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const ObjectPera = styled.p`
@@ -98,9 +121,9 @@ const ObjectPera = styled.p`
   letter-spacing: 4.56px;
 `;
 const AddressContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 30px 0;
   display: flex;
-  width: 989px;
+  width: 90%;
   padding: 20px 38px;
   flex-direction: column;
   justify-content: center;
@@ -113,10 +136,16 @@ const AddressContainer = styled.div`
 const H2 = styled.h2`
   font-size: 2rem;
   font-weight: 700;
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 const P = styled.p`
   font-size: 2rem;
-  font-weight: 200;
+  font-weight: 100;
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 `;
 const LangContainer = styled.div`
   width: 70%;
@@ -130,7 +159,7 @@ const LangContainer = styled.div`
   align-items: center;
   border-radius: 20px;
   z-index: 999;
-  background: #A7C5FC50;
+  background: #a7c5fc50;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   font-size: 1.5rem;
@@ -143,7 +172,20 @@ const ButtonLan = styled.div`
   justify-content: center;
   cursor: pointer;
 `;
-
+export const FormContainer = styled.div`
+  width: 80%;
+  height: 40%;
+  margin: 20px 0;
+  /* background-color: pink; */
+  display: flex;
+  flex-direction: ${(props) => props.flexDirection};
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+`;
 // ====================================================================
 
 const HomePage = () => {
@@ -161,7 +203,7 @@ const HomePage = () => {
     <Desktop8Root>
       {language === null && (
         <LangContainer className={{}}>
-          <div style={{ display: "flex", gap: 20 , alignItems:"center"}}>
+          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
             <span>Select a language:</span>
             <div style={{ display: "flex", gap: 20 }}>
               <ButtonLan onClick={() => handleLanguageChange("hindi")}>
@@ -177,8 +219,8 @@ const HomePage = () => {
       <Global />
       <Header />
       <Desktop8Child alt='' src='/line-5.svg' />
-      <div style={{ position: "relative" }}>
-        <WhatsappImage20230813At1Parent>
+      <div style={{ position: "relative", marginTop: 50 }}>
+        {/* <WhatsappImage20230813At1Parent>
           <WhatsappImage20230813At1
             alt=''
             src='/whatsapp-image-20230813-at-1650-1@2x.png'
@@ -188,7 +230,7 @@ const HomePage = () => {
               ? " MITHSHA VYAPAR SANCHAR"
               : "मिथशा व्यापार संचार"}{" "}
           </MithshaVyaparSanchar>
-        </WhatsappImage20230813At1Parent>
+        </WhatsappImage20230813At1Parent> */}
       </div>
       {/* <div style={{ position: "relative", width: "100%", height: "29.5rem" }}>
         <ApplyForm />
@@ -216,7 +258,7 @@ const HomePage = () => {
           position: "relative",
         }}
       >
-        <Container id='certificate' className='certificate'>
+        <FormContainer id='certificate' className='certificate'>
           <LeftContainer>
             <img src='/Frame 57.png' alt='' />
           </LeftContainer>
@@ -233,7 +275,7 @@ const HomePage = () => {
               </Link>
             </ClickHere_Container>
           </RightContainer>
-        </Container>
+        </FormContainer>
 
         <LeftRightContainer
           id='About'
@@ -281,15 +323,7 @@ const HomePage = () => {
           }
         />
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            width: "60%",
-          }}
-        >
+        <ObjectiveContainer style={{}}>
           <H1>{language === "english" ? "Objective" : " विषयनिष्ठ  "} </H1>
           <ObjectPera>
             {language === "english"
@@ -324,7 +358,7 @@ const HomePage = () => {
             </P>
             <P>Contact Number - 0522 - 3503970</P>
           </AddressContainer>
-        </div>
+        </ObjectiveContainer>
       </div>
       {/* <FrameContainer>
         <FrameItem />
