@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import Global from "../global";
 import Link from "next/link";
+import './HomePage.css';
 import LeftRightContainer, {
   H1,
   Container,
@@ -25,27 +26,27 @@ const Desktop8Child = styled.img`
 `;
 const WhatsappImage20230813At1 = styled.img`
   position: relative;
-  width: 40%;
+  width: 20%;
   object-fit: cover;
 `;
 const MithshaVyaparSanchar = styled.div`
   position: relative;
   font-weight: 600;
   display: inline-block;
-  width: 29.38rem;
-  height: 3.19rem;
+  ${'' /* width: 29.38rem; */}
+  ${'' /* height: 3.19rem; */}
   flex-shrink: 0;
   @media (max-width: 600px) {
     font-size: 1rem;
   }
 `;
-const WhatsappImage20230813At1Parent = styled.div`
+const LogoContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 1.13rem;
-  font-size: var(--font-size-13xl);
+  font-size: 2rem;
 `;
 
 // const Director = styled.div`
@@ -219,18 +220,9 @@ const HomePage = () => {
       <Global />
       <Header />
       <Desktop8Child alt='' src='/line-5.svg' />
-      <div style={{ position: "relative", marginTop: 50 }}>
-        {/* <WhatsappImage20230813At1Parent>
-          <WhatsappImage20230813At1
-            alt=''
-            src='/whatsapp-image-20230813-at-1650-1@2x.png'
-          />
-          <MithshaVyaparSanchar>
-            {language === "english"
-              ? " MITHSHA VYAPAR SANCHAR"
-              : "मिथशा व्यापार संचार"}{" "}
-          </MithshaVyaparSanchar>
-        </WhatsappImage20230813At1Parent> */}
+      <div style={{}}>
+
+        <div></div>
       </div>
       {/* <div style={{ position: "relative", width: "100%", height: "29.5rem" }}>
         <ApplyForm />
@@ -258,6 +250,18 @@ const HomePage = () => {
           position: "relative",
         }}
       >
+        <div className="LogoContainer">
+
+          <WhatsappImage20230813At1
+            alt=''
+            src='/whatsapp-image-20230813-at-1650-1@2x.png'
+          />
+          <MithshaVyaparSanchar>
+            {language === "english"
+              ? " MITHSHA VYAPAR SANCHAR"
+              : "मिथशा व्यापार संचार"}{" "}
+          </MithshaVyaparSanchar>
+        </div>
         <FormContainer id='certificate' className='certificate'>
           <LeftContainer>
             <img src='/Frame 57.png' alt='' />

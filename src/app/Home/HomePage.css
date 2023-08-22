@@ -1,0 +1,19 @@
+.red{
+    color: red;
+}
+.LogoContainer{
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    /* border:1px solid green; */
+}
+@media (max-width : 700px ){
+    .LogoContainer{
+        width:100%;
+    display: flex;
+    align-items: center;
+    justify-content:  center;
+    font-size: 1rem;
+    gap: 10px;
+    }
+}
