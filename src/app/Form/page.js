@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import Link from "../../../node_modules/next/link";
 import axios from "axios";
+import Required from "./Required";
 // import { SubmitHandle } from "../utils/googleSheets";
 
 const Container = styled.div`
@@ -114,6 +115,7 @@ const IndexPage = () => {
     dob: "",
     castType: "",
     maritalStatus: "",
+    Referral: "",
   };
   const [qualifications, setQualifications] = useState([
     {
@@ -204,7 +206,7 @@ const IndexPage = () => {
     permanentMobile: formData.permanentMobile,
     dob: formData.dob,
     cast_Type: formData.castType,
-    
+
     marital_Status: formData.maritalStatus,
     //
     university: qualifications.university,
@@ -215,6 +217,7 @@ const IndexPage = () => {
     designation: workExperience.designation,
     startDate: workExperience.startDate,
     endDate: workExperience.endDate,
+    Referral: formData.Referral,
   };
   // Inside your form submission function
 
@@ -261,7 +264,7 @@ const IndexPage = () => {
         console.log("response", response);
       });
   };
- 
+
   const onSubmit = (values) => {
     setFormData(values); // Update the state with form data
     console.log(values);
@@ -324,6 +327,7 @@ const IndexPage = () => {
           <FormGroup>
             <Label>Full Name</Label>
             <Input
+              required
               type='text'
               name='fullName'
               value={formData.fullName}
@@ -336,6 +340,7 @@ const IndexPage = () => {
             <FormGroup>
               <Label>Aadhar Number</Label>
               <Input
+                required
                 type='text'
                 name='aadharNumber'
                 value={formData.aadharNumber}
@@ -348,6 +353,7 @@ const IndexPage = () => {
             <FormGroup>
               <Label>Phone Number</Label>
               <Input
+                required
                 type='text'
                 name='phoneNumber'
                 value={formData.phoneNumber}
@@ -362,6 +368,7 @@ const IndexPage = () => {
           <FormGroup>
             <Label>{"Father's Name"}</Label>
             <Input
+              required
               type='text'
               name='fathersName'
               value={formData.fathersName}
@@ -390,6 +397,7 @@ const IndexPage = () => {
                 <FormGroup style={{ marginRight: 10 }}>
                   <Label> Pincode</Label>
                   <Input
+                    required
                     type='text'
                     name='correspondencePincode'
                     value={formData.correspondencePincode}
@@ -405,6 +413,7 @@ const IndexPage = () => {
                 <FormGroup>
                   <Label>Mobile</Label>
                   <Input
+                    required
                     type='text'
                     name='correspondenceMobile'
                     value={formData.correspondenceMobile}
@@ -430,12 +439,15 @@ const IndexPage = () => {
                     updateFieldValue("permanentAddress", e.target.value)
                   }
                 />
+              {!formData.permanentAddress && <Required />}
+
                 <ErrorMessageStyled name='permanentAddress' component='div' />
               </FormGroup>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <FormGroup style={{ marginRight: 10 }}>
                   <Label>Permanent Pincode</Label>
                   <Input
+                    required
                     type='text'
                     name='permanentPincode'
                     value={formData.permanentPincode}
@@ -448,6 +460,7 @@ const IndexPage = () => {
                 <FormGroup>
                   <Label>Permanent Mobile</Label>
                   <Input
+                    required
                     type='text'
                     name='permanentMobile'
                     value={formData.permanentMobile}
@@ -464,6 +477,7 @@ const IndexPage = () => {
           <FormGroup>
             <Label>Date of Birth</Label>
             <Input
+              required
               type='date'
               name='dob'
               value={formData.dob}
@@ -487,6 +501,7 @@ const IndexPage = () => {
                 <option value='gen'>General</option>
                 <option value='pwds'>PWDS(divyangjan) </option>
               </Field>
+              {!formData.castType && <Required />}
               <ErrorMessageStyled name='cardType' component='div' />
             </FormGroup>
 
@@ -527,6 +542,7 @@ const IndexPage = () => {
                     <TableCell>{qualification.degree}</TableCell>
                     <TableCell>
                       <Input
+                        required
                         type='text'
                         name={`qualifications[${index}].university`}
                         value={qualification.university}
@@ -541,6 +557,7 @@ const IndexPage = () => {
                     </TableCell>
                     <TableCell>
                       <Input
+                        required
                         type='text'
                         name={`qualifications[${index}].year`}
                         value={qualification.year}
@@ -551,6 +568,7 @@ const IndexPage = () => {
                     </TableCell>
                     <TableCell>
                       <Input
+                        required
                         type='text'
                         name={`qualifications[${index}].percentage`}
                         value={qualification.percentage}
@@ -589,6 +607,7 @@ const IndexPage = () => {
                     <TableCell>{experience.srno}</TableCell>
                     <TableCell>
                       <Input
+                        required
                         type='text'
                         name={`workExperience[${index}].company`}
                         value={experience.company}
@@ -599,6 +618,7 @@ const IndexPage = () => {
                     </TableCell>
                     <TableCell>
                       <Input
+                        required
                         type='text'
                         name={`workExperience[${index}].designation`}
                         value={experience.designation}
@@ -613,6 +633,7 @@ const IndexPage = () => {
                     </TableCell>
                     <TableCell>
                       <Input
+                        required
                         type='text'
                         name={`workExperience[${index}].startDate`}
                         value={experience.startDate}
@@ -639,6 +660,15 @@ const IndexPage = () => {
                 ))}
               </tbody>
             </Table>
+            <Label>Referral</Label>
+            <div style={{}}>
+              <Input
+                type='text'
+                name='Referral'
+                value={formData.Referral}
+                onChange={(e) => updateFieldValue("Referral", e.target.value)}
+              />
+            </div>
           </FormGroup>
           <div
             style={{
