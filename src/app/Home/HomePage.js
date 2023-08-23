@@ -200,6 +200,8 @@ const HomePage = () => {
   const handleLanguageChange = (selectedLanguage) => {
     setLanguage(selectedLanguage);
   };
+
+  
   return (
     <Desktop8Root>
       {language === null && (

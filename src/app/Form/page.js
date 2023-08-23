@@ -5,6 +5,9 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import Link from "../../../node_modules/next/link";
 import axios from "axios";
 import Required from "./Required";
+import "./Form.css";
+// import sendEmail
+
 // import { SubmitHandle } from "../utils/googleSheets";
 
 const Container = styled.div`
@@ -14,6 +17,9 @@ const Container = styled.div`
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f8f8f8;
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -95,14 +101,15 @@ const Option = styled.div`
 const CheckedText = styled.div``;
 const BackBTn = styled.div`
   position: absolute;
-  left: 50px;
-  font-size: 3rem;
+  left: 5%;
+  font-size: 1rem;
 `;
 
 const IndexPage = () => {
   // Initial values and onSubmit function (same as before)\
   const initialValues = {
     fullName: "",
+    Gmail: "",
     aadharNumber: "",
     phoneNumber: "",
     fathersName: "",
@@ -190,11 +197,13 @@ const IndexPage = () => {
       [fieldName]: value,
     }));
   };
+  const [SubmitData, setSubmitData] = useState(false);
 
   const alldata = {
     Form_Type: isChecked,
 
     FullName: formData.fullName,
+    Gmail: formData.Gmail,
     aadhar_Number: formData.aadharNumber,
     phone_Number: formData.phoneNumber,
     fathers_Name: formData.fathersName,
@@ -205,7 +214,7 @@ const IndexPage = () => {
     permanentPincode: formData.permanentPincode,
     permanentMobile: formData.permanentMobile,
     dob: formData.dob,
-    cast_Type: formData.castType,
+    Catagory: formData.castType,
 
     marital_Status: formData.maritalStatus,
     //
@@ -255,14 +264,55 @@ const IndexPage = () => {
 
   const SubmitHandler = async () => {
     console.log("alldata ", alldata);
-    await axios
-      .post(
-        "https://sheet.best/api/sheets/7d33220f-660f-4e5f-82bc-b49e513a85ab",
-        alldata
-      )
-      .then((response) => {
-        console.log("response", response);
-      });
+    if (
+      formData.fullName &&
+      formData.Gmail &&
+      formData.aadharNumber &&
+      formData.phoneNumber &&
+      formData.fathersName &&
+      formData.correspondenceAddress &&
+      formData.correspondencePincode &&
+      formData.correspondenceMobile &&
+      formData.permanentAddress &&
+      formData.permanentPincode &&
+      formData.permanentMobile &&
+      formData.dob &&
+      formData.castType &&
+      formData.maritalStatus &&
+      //
+      qualifications.university &&
+      qualifications.year &&
+      qualifications.percentage &&
+      //
+      workExperience.company &&
+      workExperience.startDate &&
+      workExperience.designation
+    ) {
+      setSubmitData(true);
+      await axios
+        .post(
+          "https://sheet.best/api/sheets/7d33220f-660f-4e5f-82bc-b49e513a85ab",
+          alldata
+        )
+        .then((response) => {
+          console.log("response", response);
+        });
+
+      async (email, subject, message) => {
+        return axios({
+          method: "post",
+          url: "/api/send-mail",
+          data: {
+            email: formData.Gmail,
+            subject: subject,
+            message: message,
+          },
+        });
+      };
+    } else {
+      // alert("FF");
+      setSubmitData(false);
+    }
   };
 
   const onSubmit = (values) => {
@@ -271,9 +321,11 @@ const IndexPage = () => {
   };
 
   return (
-    <Container>
+    <Container className='TextSmall'>
       <Link href='/'>
-        <BackBTn>{"<"}</BackBTn>
+        <BackBTn>
+          <div>{"Back"}</div>
+        </BackBTn>
       </Link>
       <div
         style={{
@@ -283,7 +335,7 @@ const IndexPage = () => {
           width: "100%",
         }}
       >
-        <img src='/bottom-img-1@2x.png' />
+        <img style={{ width: "80%" }} src='/bottom-img-1@2x.png' />
       </div>
       <div
         style={{
@@ -335,7 +387,17 @@ const IndexPage = () => {
             />
             <ErrorMessageStyled name='fullName' component='div' />
           </FormGroup>
-
+          <FormGroup>
+            <Label>Gmail</Label>
+            <Input
+              required
+              type='text'
+              name='Gmail'
+              value={formData.Gmail}
+              onChange={(e) => updateFieldValue("Gmail", e.target.value)}
+            />
+            <ErrorMessageStyled name='aadharNumber' component='div' />
+          </FormGroup>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <FormGroup>
               <Label>Aadhar Number</Label>
@@ -354,12 +416,14 @@ const IndexPage = () => {
               <Label>Phone Number</Label>
               <Input
                 required
-                type='text'
+                type='Number'
                 name='phoneNumber'
                 value={formData.phoneNumber}
-                onChange={(e) =>
-                  updateFieldValue("phoneNumber", e.target.value)
-                }
+                onChange={(e) => {
+                  if (formData.phoneNumber.length < 10) {
+                    updateFieldValue("phoneNumber", e.target.value);
+                  }
+                }}
               />
               <ErrorMessageStyled name='phoneNumber' component='div' />
             </FormGroup>
@@ -382,7 +446,7 @@ const IndexPage = () => {
                 <Label>Correspondence Address</Label>
                 <TextArea
                   name='correspondenceAddress'
-                  rows='3'
+                  rows={8}
                   value={formData.correspondenceAddress}
                   onChange={(e) =>
                     updateFieldValue("correspondenceAddress", e.target.value)
@@ -398,7 +462,7 @@ const IndexPage = () => {
                   <Label> Pincode</Label>
                   <Input
                     required
-                    type='text'
+                    type='Number'
                     name='correspondencePincode'
                     value={formData.correspondencePincode}
                     onChange={(e) =>
@@ -414,7 +478,7 @@ const IndexPage = () => {
                   <Label>Mobile</Label>
                   <Input
                     required
-                    type='text'
+                    type='Number'
                     name='correspondenceMobile'
                     value={formData.correspondenceMobile}
                     onChange={(e) =>
@@ -433,13 +497,12 @@ const IndexPage = () => {
                 <Label>Permanent Address</Label>
                 <TextArea
                   name='permanentAddress'
-                  rows='3'
+                  rows={8}
                   value={formData.permanentAddress}
                   onChange={(e) =>
                     updateFieldValue("permanentAddress", e.target.value)
                   }
                 />
-              {!formData.permanentAddress && <Required />}
 
                 <ErrorMessageStyled name='permanentAddress' component='div' />
               </FormGroup>
@@ -448,7 +511,7 @@ const IndexPage = () => {
                   <Label>Permanent Pincode</Label>
                   <Input
                     required
-                    type='text'
+                    type='Number'
                     name='permanentPincode'
                     value={formData.permanentPincode}
                     onChange={(e) =>
@@ -461,7 +524,7 @@ const IndexPage = () => {
                   <Label>Permanent Mobile</Label>
                   <Input
                     required
-                    type='text'
+                    type='Number'
                     name='permanentMobile'
                     value={formData.permanentMobile}
                     onChange={(e) =>
@@ -490,6 +553,7 @@ const IndexPage = () => {
             <FormGroup>
               <Label>Cast: </Label>
               <Field
+                required
                 as='select'
                 name='castType'
                 value={formData.castType}
@@ -501,13 +565,14 @@ const IndexPage = () => {
                 <option value='gen'>General</option>
                 <option value='pwds'>PWDS(divyangjan) </option>
               </Field>
-              {!formData.castType && <Required />}
+
               <ErrorMessageStyled name='cardType' component='div' />
             </FormGroup>
 
             <FormGroup>
               <Label>Marital Status:</Label>
               <Field
+                required
                 as='select'
                 name='maritalStatus'
                 value={formData.maritalStatus}
@@ -524,6 +589,7 @@ const IndexPage = () => {
             </FormGroup>
           </div>
           <FormGroup>
+            {/* <div style={{ width: "100%" }}> */}
             <Label>Qualifications</Label>
             <Table>
               <thead>
@@ -558,7 +624,7 @@ const IndexPage = () => {
                     <TableCell>
                       <Input
                         required
-                        type='text'
+                        type='Number'
                         name={`qualifications[${index}].year`}
                         value={qualification.year}
                         onChange={(e) =>
@@ -569,7 +635,7 @@ const IndexPage = () => {
                     <TableCell>
                       <Input
                         required
-                        type='text'
+                        type='Number'
                         name={`qualifications[${index}].percentage`}
                         value={qualification.percentage}
                         onChange={(e) =>
@@ -585,6 +651,7 @@ const IndexPage = () => {
                 ))}
               </tbody>
             </Table>
+            {/* </div> */}
           </FormGroup>
 
           {/* ... (work experience section) */}
@@ -631,10 +698,10 @@ const IndexPage = () => {
                         }
                       />
                     </TableCell>
-                    <TableCell>
+                    <TableCell className='TextSmall'>
                       <Input
                         required
-                        type='text'
+                        type='date'
                         name={`workExperience[${index}].startDate`}
                         value={experience.startDate}
                         onChange={(e) =>
@@ -646,9 +713,9 @@ const IndexPage = () => {
                         }
                       />
                     </TableCell>
-                    <TableCell>
+                    <TableCell className='TextSmall'>
                       <Input
-                        type='text'
+                        type='date'
                         name={`workExperience[${index}].endDate`}
                         value={experience.endDate}
                         onChange={(e) =>
@@ -660,15 +727,25 @@ const IndexPage = () => {
                 ))}
               </tbody>
             </Table>
-            <Label>Referral</Label>
-            <div style={{}}>
-              <Input
-                type='text'
-                name='Referral'
-                value={formData.Referral}
-                onChange={(e) => updateFieldValue("Referral", e.target.value)}
-              />
-            </div>
+            <FormGroup
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 10,
+                gap: 10,
+              }}
+            >
+              <Label>Referral</Label>
+              <div style={{}}>
+                <Input
+                  type='text'
+                  name='Referral'
+                  value={formData.Referral}
+                  onChange={(e) => updateFieldValue("Referral", e.target.value)}
+                />
+              </div>
+            </FormGroup>
           </FormGroup>
           <div
             style={{
@@ -678,11 +755,10 @@ const IndexPage = () => {
               width: "100%",
             }}
           >
-            <Link href='/Payment'>
-              <Button type='submit' onClick={SubmitHandler}>
-                Pay 299
-              </Button>
-            </Link>
+            <Button type='submit' onClick={SubmitHandler}>
+              Pay 299
+            </Button>
+            {SubmitData && <Link href='/Submit'></Link>}
           </div>
         </Form>
       </Formik>
