@@ -393,7 +393,7 @@ const IndexPage = () => {
               required
               type='text'
               name='Gmail'
-              value={formData.Gmail}
+              value={formData.Gmail}  
               onChange={(e) => updateFieldValue("Gmail", e.target.value)}
             />
             <ErrorMessageStyled name='aadharNumber' component='div' />
@@ -745,7 +745,8 @@ const IndexPage = () => {
                   onChange={(e) => updateFieldValue("Referral", e.target.value)}
                 />
               </div>
-            </FormGroup>
+      
+
           </FormGroup>
           <div
             style={{
@@ -755,8 +756,9 @@ const IndexPage = () => {
               width: "100%",
             }}
           >
+         
             <Button type='submit' onClick={SubmitHandler}>
-              Pay 299
+              Pay Rs.299
             </Button>
             {SubmitData && <Link href='/Submit'></Link>}
           </div>
