@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -396,6 +397,14 @@ const IndexPage = () => {
   // const sss = () => {
   //   console.log("989");
   // };
+
+  const [TermCondition, setTermCondition] = useState(false);
+
+  // const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setTermCondition(!TermCondition);
+  };
 
   return (
     <Container className='TextSmall'>
@@ -885,6 +894,18 @@ const IndexPage = () => {
               />
             </div>
           </FormGroup>
+          <FormGroup>
+            <label style={{ display: "flex" }}>
+              <input
+                type='checkbox'
+                checked={TermCondition}
+                onChange={handleCheckboxChange}
+              />
+              <p style={{ marginLeft: 10 }}>
+                I agree to the terms and conditions
+              </p>
+            </label>
+          </FormGroup>
           <div
             style={{
               display: "flex",
@@ -893,7 +914,7 @@ const IndexPage = () => {
               width: "100%",
             }}
           >
-            <Button type='submit' onClick={SubmitHandler}>
+            <Button type='submit' onClick={TermCondition ? SubmitHandler : ""}>
               Pay Rs.299
             </Button>
             {/* {SubmitData && <Link href='/Submit'></Link>} */}
