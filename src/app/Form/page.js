@@ -715,7 +715,7 @@ const IndexPage = () => {
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <FormGroup>
-              <Label>Catagory: </Label>
+              <Label>Category: </Label>
               <Field
                 required
                 as='select'
