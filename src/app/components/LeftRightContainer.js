@@ -42,7 +42,7 @@ export const RightContainer = styled.div`
   }
 `;
 export const H1 = styled.h1`
-  color: #1c40fe;
+  color: var(--bgColor);
   /* font-size: 3rem; */
   font-weight: 900;
   font-size: 1.5rem;

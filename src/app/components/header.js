@@ -13,7 +13,7 @@ const Home = styled.div`
   top: 0rem;
   left: 0rem;
   font-size: var(--font-size-smi-9);
-  color: var(--color-gray-200);
+  color: var(--bgColor);
   display: inline-block;
   width: 2.5rem;
   height: 0.85rem;
@@ -164,7 +164,7 @@ export const NavItem = styled.li`
 
 export const NavbarWrapper = styled.div`
   width: 100%;
-  background-color: blue;
+  background-color:var(--bgColor);
   display: flex;
   align-items: center;
   justify-content: space-between;

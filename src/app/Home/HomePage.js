@@ -89,7 +89,7 @@ const ClickHere = styled.div`
   border-radius: 50px;
   font-size: 1.5rem;
   /* width: 100px; */
-  background: var(--color_royalblue);
+  background: var(--bgColor);
   margin: 20px 0;
   @media (max-width: 600px) {
     font-size: 1rem;
@@ -166,7 +166,7 @@ const LangContainer = styled.div`
   font-size: 1.5rem;
 `;
 const ButtonLan = styled.div`
-  background: #5d8bdab9;
+  background: var(--bgColor);
   padding: 5px 20px;
   border-radius: 20px;
   display: flex;
@@ -287,7 +287,7 @@ const HomePage = () => {
           id='About'
           Heading={language === "english" ? "About" : "बारे में "}
           flexDirection='row'
-          Img_source='/AboutCompany.png'
+          Img_source='/Frame 50.png'
           pera={
             language === "english"
               ? "India faced massive unemployment during the covid pandemic. One of the worst hit sectors was the impact of the unorganized sector, firstlydue to sudden countrywide lockdown and then economic crisis. Whilesome of them managed to get back to work, many are yet to recover,like roadside shop owners, beauty parlors, vegetable vendors, etc., asthey took loans to survive and had to sell their equipment or whateverassets they had to repay. « The Coronavirus pandemic has wrecked the lives and livelihoods of millions of people in India, especially those in major cities in urban areas, who had once left their hometown/villages in search for work here. « Self-employed workers and casual wage workers are most affected with 84% and 81% losing their employment, respectively. « Atotal of 89% of the urban households reported that they would not be able to pay rent for the following month"
@@ -310,7 +310,7 @@ const HomePage = () => {
           id='Mission'
           Heading={language === "english" ? "Mission" : " उद्देश्य  "}
           flexDirection='row'
-          Img_source='/Frame 52.png'
+          Img_source='/Frame 501.png'
           pera={
             language === "english"
               ? " Upgrade skills to Intemational standards through significant industry involvement and develop necessary frameworks for standards, curriculum and quality assurance. Enhance, support and coordinate private sector initiatives for skill development through appropriate Public-Private Partnership ( PPP) models: strive for significant operational and financial involvement from private sector.  Play the role of a ‘market-maker’ by bringing funds, particularly in sectors where market mechanisms are ineffective or missing. Prioritise initiatives that can have a multiplier or catalytic effect as opposed to one-off impact. Objective To contribute significantly to the overall target of skilling up of people in India, mainly by fostering private sector initiatives in skill de programmes and to provide funding."

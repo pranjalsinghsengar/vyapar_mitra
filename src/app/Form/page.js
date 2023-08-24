@@ -8,6 +8,7 @@ import axios from "axios";
 import Required from "./Required";
 import "./Form.css";
 import { useRouter } from "next/navigation";
+import Global from "../global";
 
 // import sendEmail
 
@@ -63,7 +64,7 @@ const ErrorMessageStyled = styled(ErrorMessage)`
 
 const Button = styled.button`
   padding: 10px 50px;
-  background-color: #007bff;
+  background: var(--bgColor);
   color: white;
   border: none;
   border-radius: 5px;
@@ -479,7 +480,7 @@ const IndexPage = () => {
             <ErrorMessageStyled name='fullName' component='div' />
           </FormGroup>
           <FormGroup>
-            <Label>Gmail</Label>
+            <Label>Email</Label>
             <Input
               required
               type='email'
@@ -714,7 +715,7 @@ const IndexPage = () => {
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <FormGroup>
-              <Label>Cast: </Label>
+              <Label>Catagory: </Label>
               <Field
                 required
                 as='select'
@@ -893,6 +894,9 @@ const IndexPage = () => {
                 onChange={(e) => updateFieldValue("Referral", e.target.value)}
               />
             </div>
+            <span style={{ fontSize: "0.8rem" }}>
+              <i>(Optional)</i>
+            </span>
           </FormGroup>
           <FormGroup>
             <label style={{ display: "flex" }}>
@@ -921,6 +925,7 @@ const IndexPage = () => {
           </div>
         </Form>
       </Formik>
+      <Global/>
     </Container>
   );
 };

@@ -31,6 +31,7 @@ export default createGlobalStyle`@import url('https://fonts.googleapis.com/css2?
 /* Colors */
 --color_white: #fff;
 --color_black: #000;
+--bgColor:#FF9327;
 --color_mediumblue: #1c40fe;
 --color_royalblue: #1c76fe;
 --color_gray-100: #fefefe;
