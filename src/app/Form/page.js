@@ -723,7 +723,7 @@ const IndexPage = () => {
                 value={formData.castType}
                 onChange={(e) => updateFieldValue("castType", e.target.value)}
               >
-                <option value=''>Select Card Type</option>
+                <option value=''>Select Type</option>
                 <option value='sc'>SC</option>
                 <option value='st'>ST</option>
                 <option value='gen'>General</option>
@@ -919,7 +919,7 @@ const IndexPage = () => {
             }}
           >
             <Button type='submit' onClick={TermCondition ? SubmitHandler : ""}>
-              Pay Rs.299
+              Pay Rs.232
             </Button>
             {/* {SubmitData && <Link href='/Submit'></Link>} */}
           </div>
